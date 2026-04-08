@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>李志铭 Nicholas — deerman</title>
+<style>
+:root {
+  --bg:#0f0e0c; --bg2:#181610; --bg3:#221f18;
+  --amber:#c8882a; --amber-l:#e6a84a; --amber-d:#7a5118;
+  --teal:#2a8c72; --teal-l:#3db899;
+  --text:#e8e0d0; --muted:#9a9080; --dim:#5a5248;
+  --border:#2e2a22; --border-l:#3e3a30;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;font-size:16px}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:.9rem 2rem;display:flex;justify-content:space-between;align-items:center;background:rgba(15,14,12,.88);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.nav-logo{font-size:15px;color:var(--amber);letter-spacing:.08em;font-weight:500}
+.nav-links{display:flex;gap:1.5rem}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:14px;transition:color .2s}
+.nav-links a:hover{color:var(--amber-l)}
+
+section{padding:5rem 2rem;max-width:760px;margin:0 auto}
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding-top:6rem;max-width:760px;margin:0 auto}
+
+.s-label{font-size:12px;color:var(--amber);letter-spacing:.18em;text-transform:uppercase;margin-bottom:.4rem}
+.s-title{font-size:1.8rem;font-weight:500;margin-bottom:2.5rem}
+
+/* HERO */
+.eyebrow{font-size:13px;color:var(--amber);letter-spacing:.2em;text-transform:uppercase;margin-bottom:1.5rem;display:flex;align-items:center;gap:10px}
+.eyebrow::after{content:'';flex:1;height:1px;background:var(--amber-d);max-width:80px}
+.hero-name{font-size:clamp(2.6rem,8vw,4.8rem);font-weight:500;line-height:1.1;margin-bottom:.4rem}
+.hero-en{font-size:clamp(1rem,3vw,1.6rem);color:var(--muted);font-weight:400;margin-bottom:2rem;letter-spacing:.05em}
+.hero-desc{font-size:1.05rem;color:var(--muted);max-width:520px;line-height:1.9;margin-bottom:2.5rem}
+.hero-desc strong{color:var(--amber-l);font-weight:400}
+.hero-tags{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:3rem}
+.tag{font-size:13px;padding:5px 14px;border:1px solid var(--border-l);border-radius:100px;color:var(--muted);transition:all .2s}
+.tag:hover{border-color:var(--amber);color:var(--amber-l)}
+.tag.a{border-color:var(--amber-d);color:var(--amber)}
+.cta{display:flex;gap:1rem;flex-wrap:wrap}
+.btn{display:inline-block;padding:10px 24px;border-radius:6px;font-size:14px;text-decoration:none;transition:all .2s}
+.btn-p{background:var(--amber);color:#0f0e0c;font-weight:500}
+.btn-p:hover{background:var(--amber-l)}
+.btn-o{border:1px solid var(--border-l);color:var(--muted)}
+.btn-o:hover{border-color:var(--amber);color:var(--amber)}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:2rem}
+.acard{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:1.1rem 1.25rem;transition:border-color .2s}
+.acard:hover{border-color:var(--border-l)}
+.acard-lbl{font-size:12px;color:var(--dim);margin-bottom:.2rem}
+.acard-val{font-size:15px;color:var(--text)}
+.acard-val span{color:var(--muted);font-size:14px}
+.body-text{color:var(--muted);line-height:1.9;font-size:15px}
+.hl{color:var(--teal-l)}
+
+/* DUAL TIMELINE */
+.tl-header-row{display:grid;grid-template-columns:1fr 56px 1fr;margin-bottom:1.25rem}
+.tl-hd{font-size:12px;color:var(--amber);letter-spacing:.14em;text-transform:uppercase}
+.tl-hd.r{text-align:right}
+
+.tl-body{display:grid;grid-template-columns:1fr 56px 1fr;align-items:start}
+
+.tl-col{display:flex;flex-direction:column;gap:12px}
+.tl-col.r{align-items:flex-end}
+
+.tl-body{align-items:stretch}
+.tl-spine{display:flex;flex-direction:column;align-items:center;justify-content:space-between;position:relative;padding:8px 0}
+.spine-line{position:absolute;top:0;bottom:0;left:50%;width:1px;background:var(--border);transform:translateX(-50%)}
+.yr{position:relative;z-index:1;background:var(--bg3);border:1px solid var(--border-l);border-radius:100px;padding:3px 7px;font-size:11px;color:var(--dim);white-space:nowrap;text-align:center}
+
+.ti{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:.9rem 1rem;transition:border-color .2s;width:100%}
+.ti:hover{border-color:var(--border-l)}
+.tl-col.r .ti{text-align:right}
+.ti-per{font-size:11px;color:var(--amber);margin-bottom:3px;letter-spacing:.03em}
+.ti-tag{display:inline-block;font-size:10px;padding:2px 7px;border-radius:100px;background:var(--bg3);border:1px solid var(--border);color:var(--dim);margin-bottom:5px}
+.ti-tag.t{border-color:var(--teal);color:var(--teal-l)}
+.ti-tag.a{border-color:var(--amber-d);color:var(--amber)}
+.ti-title{font-size:14px;font-weight:500;color:var(--text);margin-bottom:2px;line-height:1.35}
+.ti-sub{font-size:12px;color:var(--muted);margin-bottom:.35rem}
+.ti-desc{font-size:12px;color:var(--dim);line-height:1.6}
+.ti-spacer{height:1px;/* invisible placeholder */}
+
+/* CONVERGE */
+.converge{display:flex;flex-direction:column;align-items:center;margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid var(--border)}
+.conv-lines{position:relative;width:100%;height:28px;margin-bottom:.75rem}
+.conv-lines::before,.conv-lines::after{content:'';position:absolute;top:0;height:100%;width:1px;background:var(--border)}
+.conv-lines::before{left:25%}
+.conv-lines::after{right:25%}
+.conv-arrow{position:absolute;bottom:0;left:50%;transform:translateX(-50%);border-left:6px solid transparent;border-right:6px solid transparent;border-top:7px solid var(--amber-d)}
+.now-card{background:var(--bg2);border:1px solid var(--amber-d);border-radius:10px;padding:1.2rem 2rem;text-align:center;width:100%;max-width:420px}
+.now-lbl{font-size:11px;color:var(--amber);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.3rem}
+.now-title{font-size:17px;font-weight:500;margin-bottom:.25rem}
+.now-sub{font-size:13px;color:var(--muted);margin-bottom:.5rem}
+.now-desc{font-size:13px;color:var(--dim);line-height:1.6}
+.side-note{margin-top:.9rem;font-size:12px;color:var(--dim);border:1px dashed var(--border-l);border-radius:6px;padding:.6rem 1rem;max-width:420px;text-align:center;line-height:1.6}
+.side-note span{color:var(--teal-l)}
+
+/* TRAVEL */
+.travel-intro{color:var(--muted);font-size:15px;margin-bottom:1.75rem;line-height:1.9}
+.country-grid{display:flex;flex-wrap:wrap;gap:10px}
+.chip{background:var(--bg2);border:1px solid var(--border);padding:6px 14px;border-radius:6px;font-size:14px;color:var(--muted);transition:all .2s}
+.chip:hover{border-color:var(--teal);color:var(--teal-l)}
+
+/* NOW */
+.now-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.ncard{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:1.1rem 1.25rem;position:relative;overflow:hidden;transition:border-color .2s}
+.ncard:hover{border-color:var(--teal)}
+.ncard::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--teal);opacity:0;transition:opacity .2s}
+.ncard:hover::before{opacity:1}
+.nc-lbl{font-size:12px;color:var(--teal);margin-bottom:.4rem;letter-spacing:.05em}
+.nc-title{font-size:15px;font-weight:500;margin-bottom:.4rem}
+.nc-desc{font-size:13px;color:var(--dim);line-height:1.6}
+
+/* CONNECT */
+.conn-text{color:var(--muted);font-size:15px;line-height:1.9;margin-bottom:1.75rem}
+.topic-list{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:2.5rem}
+.topic{background:var(--bg3);border:1px solid var(--border);padding:6px 16px;border-radius:100px;font-size:14px;color:var(--muted);cursor:pointer;transition:all .2s}
+.topic:hover{background:var(--amber-d);border-color:var(--amber);color:var(--amber-l)}
+.clinks{display:flex;flex-direction:column;gap:10px}
+.clink{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;text-decoration:none;color:var(--text);transition:all .2s}
+.clink:hover{border-color:var(--amber)}
+.cl-lbl{font-size:12px;color:var(--dim);margin-top:2px}
+.cl-arr{color:var(--dim);font-size:16px}
+.clink:hover .cl-arr{color:var(--amber)}
+
+footer{border-top:1px solid var(--border);padding:2rem;text-align:center;color:var(--dim);font-size:13px;max-width:760px;margin:0 auto}
+footer span{color:var(--amber-d)}
+
+.fade-in{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+
+.deer-mark{width:30px;height:30px;opacity:.55;margin-bottom:.5rem}
+
+.mob-track{display:none}
+@media(max-width:600px){
+  nav{padding:.9rem 1rem}
+  .nav-links{gap:.75rem}
+  .nav-links a{font-size:12px}
+  .about-grid,.now-grid{grid-template-columns:1fr}
+  section{padding:3.5rem 1.1rem}
+  #hero{padding:5.5rem 1.1rem 3rem}
+  .tag{font-size:12px;padding:4px 11px}
+  .hero-desc{font-size:.95rem}
+  /* 双轨时间轴：竖向堆叠 */
+  .tl-header-row{display:none}
+  .tl-body{display:flex;flex-direction:column;gap:0}
+  .tl-spine{display:none}
+  .tl-col,.tl-col.r{width:100%;align-items:flex-start}
+  .tl-col.r .ti{text-align:left}
+  .tl-col.r{margin-top:1.5rem}
+  .ti-tag{float:none!important;display:inline-block}
+  .ti{padding:.75rem .9rem}
+  .ti-title{font-size:13px}
+  .r-spacer{display:none}
+  /* 移动端轨道标题 */
+  .mob-track{display:flex;align-items:center;gap:8px;margin-bottom:.85rem;font-size:12px;color:var(--amber);letter-spacing:.14em;text-transform:uppercase}
+  .mob-track::after{content:'';flex:1;height:1px;background:var(--amber-d)}
+  /* 汇流区 */
+  .now-card{padding:1rem 1.25rem;max-width:100%}
+  .side-note{max-width:100%}
+  .conv-lines::before{left:20%}
+  .conv-lines::after{right:20%}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">deerman</div>
+  <div class="nav-links">
+    <a href="#about">关于</a>
+    <a href="#experience">历程</a>
+    <a href="#travel">足迹</a>
+    <a href="#now">在做</a>
+    <a href="#connect">联系</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <svg class="deer-mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M16 26C16 26 10 22 10 16c0-4 3-6 3-9 0-2-1-4-2-5M16 26c0 0 6-4 6-10 0-4-3-6-3-9 0-2 1-4 2-5M13 7c-2 1-4 1-5-1M19 7c2 1 4 1 5-1M11 2c-1 2-3 2-4 1M21 2c1 2 3 2 4 1M14 22l-2 7M18 22l2 7" stroke="#c8882a" stroke-width="1.5" stroke-linecap="round"/>
+    <circle cx="16" cy="16" r="2.5" fill="none" stroke="#c8882a" stroke-width="1"/>
+  </svg>
+  <div class="eyebrow">李志铭 · Deerman · 03年</div>
+  <h1 class="hero-name">站在边界处的人。</h1>
+  <div class="hero-en">Business × AI × The World in Between</div>
+  <p class="hero-desc">
+    在荣耀 GTM 做需求规划与市场策略，业余时间疯狂做 AI 实验，偶尔整理对世界的困惑。<br>
+    在<strong>商业分析</strong>和<strong>AI 落地</strong>的交叉地带，试图打通从「理解问题」到「真正解决问题」的链路。
+  </p>
+  <div class="hero-tags">
+    <span class="tag a">ENTJ</span>
+    <span class="tag">荣耀 HONOR GTM</span>
+    <span class="tag">港中深毕业</span>
+    <span class="tag">14国背包客</span>
+    <span class="tag">AI Workflow Builder</span>
+    <span class="tag">汕头人</span>
+  </div>
+  <div class="cta">
+    <a href="https://quaily.com/deerman" target="_blank" class="btn btn-o">读我的文字 →</a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="fade-in">
+  <div class="s-label">关于我</div>
+  <div class="s-title">我是谁？</div>
+  <div class="about-grid">
+    <div class="acard">
+      <div class="acard-lbl">网名由来</div>
+      <div class="acard-val">deerman <span>/ 德曼</span></div>
+    </div>
+    <div class="acard">
+      <div class="acard-lbl">来自 / 所在</div>
+      <div class="acard-val">广东汕头 <span>→ 深圳</span></div>
+    </div>
+    <div class="acard">
+      <div class="acard-lbl">本科</div>
+      <div class="acard-val">香港中文大学（深圳）<span> 国际商务</span></div>
+    </div>
+    <div class="acard">
+      <div class="acard-lbl">当前身份</div>
+      <div class="acard-val">荣耀 GTM <span>/ Demand Planning</span></div>
+    </div>
+  </div>
+  <p class="body-text">
+    我的网名 deerman 里，"鹿"代表冷静、跳脱，也有探索边界的野性——这些好像都和我挺像的。来自广东汕头，后来在深圳求学和生活，这座城市和我很合拍。
+  </p>
+  <p class="body-text" style="margin-top:1rem">
+    如果要用一个意象描述我：我像是站在<span class="hl">商业世界和 AI 世界交界处</span>的人——一边保持对新工具的好奇，一边始终盯着真实世界里的需求和流程。一直在试图打通那条链路：<span class="hl">理解问题 → 抽象框架 → 做出东西</span>。
+  </p>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="fade-in">
+  <div class="s-label">我的历程</div>
+  <div class="s-title">走过的路</div>
+
+  <div class="tl-header-row">
+    <div class="tl-hd">🎓 求学线</div>
+    <div></div>
+    <div class="tl-hd r">实践线 💼</div>
+  </div>
+
+  <div class="tl-body">
+    <!-- LEFT: 求学 -->
+    <div class="tl-col">
+      <div class="mob-track">🎓 求学线</div>
+      <div class="ti">
+        <div class="ti-per">2021.09</div>
+        <div class="ti-title">香港中文大学（深圳）</div>
+        <div class="ti-sub">国际商务 · 环球供应链方向</div>
+        <div class="ti-desc">全球仅 45 人的小项目，港中深开启四年。</div>
+      </div>
+      <div class="ti">
+        <div class="ti-per">2023.06 — 2023.08</div>
+        <div class="ti-tag a">暑期交流</div>
+        <div class="ti-title">耶鲁大学</div>
+        <div class="ti-sub">法学 · 新能源政策研究</div>
+        <div class="ti-desc">自主申请，游历纽约、波士顿、DC，第一次对"政策与产业"产生真实好奇。</div>
+      </div>
+      <div class="ti">
+        <div class="ti-per">2023.08 — 2024.01</div>
+        <div class="ti-tag a">学期交流</div>
+        <div class="ti-title">哥本哈根商学院 CBS</div>
+        <div class="ti-sub">国际商务法 · 供应链</div>
+        <div class="ti-desc">丹麦半年，顺道走遍北欧与西欧，感受不同文化语境下的商业逻辑。</div>
+      </div>
+      <div class="ti">
+        <div class="ti-per">2024.01 — 2024.05</div>
+        <div class="ti-tag a">学期交流</div>
+        <div class="ti-title">英属哥伦比亚大学 UBC</div>
+        <div class="ti-sub">供应链 · 数据分析</div>
+        <div class="ti-desc">温哥华深入供应链与数据分析，走完北美最后一段旅程。</div>
+      </div>
+      <div class="ti">
+        <div class="ti-per">2025.06</div>
+        <div class="ti-tag a">本科毕业</div>
+        <div class="ti-title">香港中文大学（深圳）</div>
+        <div class="ti-sub">全球 14 国 · 四年圆满</div>
+        <div class="ti-desc">学业与足迹交织，带着更宽的视野出发。</div>
+      </div>
+    </div>
+
+    <!-- SPINE -->
+    <div class="tl-spine">
+      <div class="spine-line"></div>
+      <div class="yr">2021</div>
+      <div class="yr">2023</div>
+      <div class="yr">2024</div>
+      <div class="yr">2025</div>
+    </div>
+
+    <!-- RIGHT: 实践 -->
+    <div class="tl-col r">
+      <div class="mob-track">💼 实践线</div>
+      <div class="r-spacer" style="height:4rem"></div>
+      <div class="ti">
+        <div class="ti-per">2023</div>
+        <div class="ti-tag" style="float:right">实习</div>
+        <div class="ti-title">普华永道 PwC</div>
+        <div class="ti-sub">政府咨询 · 城市数字化</div>
+        <div class="ti-desc">接触公共部门数字化项目，系统视角看政府与社会互动。</div>
+      </div>
+      <div class="ti">
+        <div class="ti-per">2024.06 — 2024.08</div>
+        <div class="ti-tag" style="float:right">实习</div>
+        <div class="ti-title">荣耀 HONOR · S&OP</div>
+        <div class="ti-sub">内存价格分析 · 需求预测</div>
+        <div class="ti-desc">怀着对硬件行业的探索欲加入，第一次深入消费电子运营肌理。</div>
+      </div>
+      <div class="ti">
+        <div class="ti-per">2024.06 — 2024.08</div>
+        <div class="ti-tag t" style="float:right">志愿者</div>
+        <div class="ti-title">ABC · 腾讯双百计划</div>
+        <div class="ti-sub">边远地区儿童科创教育</div>
+        <div class="ti-desc">商业分析方法与公益目标融合，为腾讯公益项目提供咨询。</div>
+      </div>
+      <div class="ti">
+        <div class="ti-per">2024.12 — 2025.03</div>
+        <div class="ti-tag" style="float:right">实习</div>
+        <div class="ti-title">Plaud.ai</div>
+        <div class="ti-sub">整合营销 · AI 产品出海</div>
+        <div class="ti-desc">参与品牌建设，同期开始系统深入 AI 领域，工作流搭建从此加速。</div>
+      </div>
+      <div class="ti">
+        <div class="ti-per">2025.06 — 2025.08</div>
+        <div class="ti-tag t" style="float:right">志愿者</div>
+        <div class="ti-title">ABC · AI 知识库项目</div>
+        <div class="ti-sub">AI 赋能公益组织</div>
+        <div class="ti-desc">为公益组织搭建 AI 知识库，把技术能力用在有意义的地方。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONVERGENCE -->
+  <div class="converge">
+    <div class="conv-lines"><div class="conv-arrow"></div></div>
+    <div class="now-card">
+      <div class="now-lbl">▸ 现在</div>
+      <div class="now-title">荣耀 HONOR · GTM 团队</div>
+      <div class="now-sub">需求规划 / Go-To-Market · 2025.08 至今</div>
+      <div class="now-desc">供应链积累 × AI 探索，在真实业务场景中把两条线接在了一起。</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- TRAVEL -->
+<section id="travel" class="fade-in">
+  <div class="s-label">足迹</div>
+  <div class="s-title">见过的世界</div>
+  <p class="travel-intro">大三那年，周游了 <strong style="color:var(--amber-l)">14 个国家</strong>，北美、欧洲、中东、东南亚都留下了脚印。旅行改变了我对人生轨迹的想法，也让我看到了许多有趣的生活姿态。</p>
+  <div class="country-grid">
+    <div class="chip">🇺🇸 美国</div><div class="chip">🇨🇦 加拿大</div>
+    <div class="chip">🇩🇰 丹麦</div><div class="chip">🇳🇴 挪威</div>
+    <div class="chip">🇮🇸 冰岛</div><div class="chip">🇳🇱 荷兰</div>
+    <div class="chip">🇩🇪 德国</div><div class="chip">🇹🇷 土耳其</div>
+    <div class="chip">🇸🇬 新加坡</div><div class="chip">🇪🇸 西班牙</div>
+    <div class="chip">🇫🇷 法国</div><div class="chip">🇵🇹 葡萄牙</div>
+    <div class="chip">🇭🇺 匈牙利</div><div class="chip">🇹🇭 泰国</div>
+  </div>
+</section>
+
+<!-- NOW -->
+<section id="now" class="fade-in">
+  <div class="s-label">最近在做</div>
+  <div class="s-title">现在的坐标</div>
+  <div class="now-grid">
+    <div class="ncard">
+      <div class="nc-lbl">AI 实践</div>
+      <div class="nc-title">周周 AI 黑客松</div>
+      <div class="nc-desc">在荣耀 GTM 内部开课讲 AI，用 Dify & Coze 手搓工作流和 Agent，探索 AI 在真实业务场景落地。</div>
+    </div>
+    <div class="ncard">
+      <div class="nc-lbl">公益 + AI</div>
+      <div class="nc-title">AI 社会价值咨询</div>
+      <div class="nc-desc">推进 AI + 社会创新的公益咨询项目，把分析能力和业务方法用在有意义的地方。</div>
+    </div>
+    <div class="ncard">
+      <div class="nc-lbl">探索中</div>
+      <div class="nc-title">数字游民生活方式</div>
+      <div class="nc-desc">持续探索工作与生活边界的可能性，关注如何设计一种可持续的、有节奏感的生活。</div>
+    </div>
+    <div class="ncard">
+      <div class="nc-lbl">写作 & 思考</div>
+      <div class="nc-title">quaily.com/deerman</div>
+      <div class="nc-desc">把深度思考放在这里，关于 AI、商业、投资和成长。Learn in public，欢迎订阅。</div>
+    </div>
+    <div class="ncard">
+      <div class="nc-lbl">投资</div>
+      <div class="nc-title">价值投资 · 全球资产配置</div>
+      <div class="nc-desc">长期关注有知有行，认同巴菲特的价投理念，探索跨市场、跨资产类别的长期配置逻辑。</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONNECT -->
+<section id="connect" class="fade-in">
+  <div class="s-label">联系我</div>
+  <div class="s-title">聊聊吧</div>
+  <p class="conn-text">和我聊天，最好的方式不是自我介绍，而是<strong style="color:var(--text)">带着一个问题或想法来</strong>。我对"你在想什么、在做什么、卡在哪里"非常敏感。欢迎聊这些话题：</p>
+  <div class="topic-list">
+    <span class="topic">AI 落地与工作流</span><span class="topic">GTM 与供应链</span>
+    <span class="topic">创业与激励机制</span><span class="topic">投资与宏观</span>
+    <span class="topic">旅行路线</span><span class="topic">汕头美食地图</span>
+    <span class="topic">消费电子行业</span><span class="topic">社会创新</span>
+    <span class="topic">个人成长系统</span>
+  </div>
+  <div class="clinks">
+    <a href="https://quaily.com/deerman" target="_blank" class="clink">
+      <div>
+        <div style="font-size:15px">深度思考订阅</div>
+        <div class="cl-lbl">quaily.com/deerman</div>
+      </div>
+      <div class="cl-arr">→</div>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <p>李志铭 Nicholas · <span>deerman</span> · 边界是拿来被突破的</p>
+  <p style="margin-top:.5rem;font-size:12px">最后更新 2025.07 · Built with care</p>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible') }), {threshold:.1});
+document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
