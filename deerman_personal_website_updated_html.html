@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>李志铭 Nicholas — deerman</title>
+<style>
+:root {
+  --bg:#0f0e0c;
+  --bg2:#181610;
+  --bg3:#221f18;
+  --card:#1d1a13;
+  --amber:#c8882a;
+  --amber-l:#e6a84a;
+  --amber-d:#7a5118;
+  --teal:#2a8c72;
+  --teal-l:#3db899;
+  --text:#e8e0d0;
+  --muted:#a49987;
+  --dim:#62594d;
+  --border:#2e2a22;
+  --border-l:#3e3a30;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif;background:radial-gradient(circle at 10% 0%,#1c1811 0,#0f0e0c 34%,#0b0a09 100%);color:var(--text);line-height:1.75;font-size:16px}
+::selection{background:var(--amber-d);color:var(--text)}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:.9rem 2rem;display:flex;justify-content:space-between;align-items:center;background:rgba(15,14,12,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.nav-logo{font-size:15px;color:var(--amber);letter-spacing:.08em;font-weight:500}
+.nav-links{display:flex;gap:1.45rem}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:14px;transition:color .2s}
+.nav-links a:hover{color:var(--amber-l)}
+
+section{padding:5rem 2rem;max-width:860px;margin:0 auto}
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding-top:6rem;max-width:860px;margin:0 auto}
+.s-label{font-size:12px;color:var(--amber);letter-spacing:.18em;text-transform:uppercase;margin-bottom:.45rem}
+.s-title{font-size:1.85rem;font-weight:500;margin-bottom:2.25rem;letter-spacing:-.02em}
+.body-text{color:var(--muted);line-height:1.95;font-size:15.5px}
+.body-text + .body-text{margin-top:1rem}
+.hl{color:var(--teal-l)}
+
+/* HERO */
+.deer-mark{width:32px;height:32px;opacity:.65;margin-bottom:.65rem}
+.eyebrow{font-size:13px;color:var(--amber);letter-spacing:.2em;text-transform:uppercase;margin-bottom:1.5rem;display:flex;align-items:center;gap:10px}
+.eyebrow::after{content:'';flex:1;height:1px;background:var(--amber-d);max-width:90px}
+.hero-name{font-size:clamp(2.75rem,8vw,5.2rem);font-weight:500;line-height:1.08;margin-bottom:.65rem;letter-spacing:-.04em}
+.hero-en{font-size:clamp(1rem,3vw,1.45rem);color:var(--muted);font-weight:400;margin-bottom:2.1rem;letter-spacing:.04em}
+.hero-desc{font-size:1.06rem;color:var(--muted);max-width:640px;line-height:1.95;margin-bottom:2.4rem}
+.hero-desc strong{color:var(--amber-l);font-weight:400}
+.hero-tags{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:3rem}
+.tag{font-size:13px;padding:5px 14px;border:1px solid var(--border-l);border-radius:100px;color:var(--muted);transition:all .2s;background:rgba(29,26,19,.35)}
+.tag:hover{border-color:var(--amber);color:var(--amber-l);transform:translateY(-1px)}
+.tag.a{border-color:var(--amber-d);color:var(--amber)}
+.cta{display:flex;gap:1rem;flex-wrap:wrap}
+.btn{display:inline-block;padding:10px 24px;border-radius:8px;font-size:14px;text-decoration:none;transition:all .2s}
+.btn-p{background:var(--amber);color:#0f0e0c;font-weight:500}
+.btn-p:hover{background:var(--amber-l)}
+.btn-o{border:1px solid var(--border-l);color:var(--muted);background:rgba(24,22,16,.45)}
+.btn-o:hover{border-color:var(--amber);color:var(--amber)}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.15rem;margin-bottom:2rem}
+.acard{background:rgba(24,22,16,.82);border:1px solid var(--border);border-radius:12px;padding:1.1rem 1.25rem;transition:border-color .2s,transform .2s}
+.acard:hover{border-color:var(--border-l);transform:translateY(-2px)}
+.acard-lbl{font-size:12px;color:var(--dim);margin-bottom:.15rem}
+.acard-val{font-size:15px;color:var(--text)}
+.acard-val span{color:var(--muted);font-size:14px}
+.identity-box{margin-top:2rem;background:linear-gradient(135deg,rgba(34,31,24,.98),rgba(24,22,16,.9));border:1px solid var(--amber-d);border-radius:14px;padding:1.35rem 1.5rem}
+.identity-title{font-size:14px;color:var(--amber-l);margin-bottom:.65rem;letter-spacing:.06em}
+.identity-text{font-size:15px;color:var(--muted);line-height:1.9}
+
+/* TRIAD */
+.triad-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.triad-card{background:rgba(24,22,16,.82);border:1px solid var(--border);border-radius:14px;padding:1.25rem 1.25rem;transition:border-color .2s,transform .2s;min-height:230px;display:flex;flex-direction:column}
+.triad-card:hover{border-color:var(--amber-d);transform:translateY(-2px)}
+.triad-no{font-size:12px;color:var(--amber);letter-spacing:.14em;text-transform:uppercase;margin-bottom:.65rem}
+.triad-title{font-size:19px;font-weight:500;margin-bottom:.15rem;color:var(--text)}
+.triad-sub{font-size:13px;color:var(--teal-l);margin-bottom:.8rem}
+.triad-text{font-size:14px;color:var(--muted);line-height:1.78}
+.triad-note{margin-top:auto;padding-top:.9rem;font-size:12.5px;color:var(--dim);line-height:1.65}
+.triad-note span{color:var(--amber-l)}
+.summary-box{background:linear-gradient(135deg,rgba(34,31,24,.98),rgba(24,22,16,.88));border:1px solid var(--amber-d);border-radius:16px;padding:1.55rem 1.65rem;margin-top:1.5rem}
+.summary-k{font-size:12px;color:var(--amber);letter-spacing:.16em;text-transform:uppercase;margin-bottom:.45rem}
+.summary-title{font-size:20px;font-weight:500;margin-bottom:.75rem}
+.summary-text{font-size:15px;color:var(--muted);line-height:1.95}
+.summary-text strong{font-weight:400;color:var(--amber-l)}
+
+/* STORY */
+.story-block{display:grid;grid-template-columns:170px 1fr;gap:1.5rem;margin-bottom:1.6rem;align-items:start}
+.story-year{position:sticky;top:86px;color:var(--amber);font-size:13px;letter-spacing:.12em;text-transform:uppercase;padding-top:.2rem}
+.story-card{background:rgba(24,22,16,.82);border:1px solid var(--border);border-radius:13px;padding:1.25rem 1.35rem;transition:border-color .2s,transform .2s}
+.story-card:hover{border-color:var(--border-l);transform:translateY(-2px)}
+.story-k{font-size:12px;color:var(--teal-l);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.35rem}
+.story-title{font-size:17px;font-weight:500;margin-bottom:.4rem}
+.story-text{font-size:14.5px;color:var(--muted);line-height:1.9}
+.story-text strong{font-weight:400;color:var(--amber-l)}
+
+/* BUILDS */
+.builds-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.build-card{background:rgba(24,22,16,.82);border:1px solid var(--border);border-radius:14px;padding:1.25rem 1.25rem;min-height:210px;display:flex;flex-direction:column;transition:border-color .2s,transform .2s}
+.build-card:hover{border-color:var(--teal);transform:translateY(-2px)}
+.build-top{display:flex;justify-content:space-between;gap:1rem;align-items:flex-start;margin-bottom:.75rem}
+.build-tag{font-size:11px;color:var(--teal-l);border:1px solid rgba(61,184,153,.35);padding:2px 8px;border-radius:100px;white-space:nowrap;background:rgba(42,140,114,.08)}
+.build-title{font-size:16px;font-weight:500;line-height:1.45}
+.build-text{font-size:13.5px;color:var(--muted);line-height:1.75;margin-top:.25rem}
+.build-learn{font-size:12.5px;color:var(--dim);line-height:1.65;margin-top:auto;padding-top:.9rem;border-top:1px dashed var(--border)}
+.build-learn span{color:var(--amber)}
+
+/* FOOTPRINTS */
+.travel-intro{color:var(--muted);font-size:15px;margin-bottom:1.75rem;line-height:1.9}
+.country-grid{display:flex;flex-wrap:wrap;gap:10px}
+.chip{background:rgba(24,22,16,.82);border:1px solid var(--border);padding:6px 14px;border-radius:7px;font-size:14px;color:var(--muted);transition:all .2s}
+.chip:hover{border-color:var(--teal);color:var(--teal-l);transform:translateY(-1px)}
+
+/* NOW */
+.now-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.ncard{background:rgba(24,22,16,.82);border:1px solid var(--border);border-radius:14px;padding:1.15rem 1.25rem;position:relative;overflow:hidden;transition:border-color .2s,transform .2s}
+.ncard:hover{border-color:var(--teal);transform:translateY(-2px)}
+.ncard::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--teal);opacity:0;transition:opacity .2s}
+.ncard:hover::before{opacity:1}
+.nc-lbl{font-size:12px;color:var(--teal);margin-bottom:.4rem;letter-spacing:.05em}
+.nc-title{font-size:15.5px;font-weight:500;margin-bottom:.4rem}
+.nc-desc{font-size:13.5px;color:var(--dim);line-height:1.7}
+
+/* CONNECT */
+.conn-text{color:var(--muted);font-size:15px;line-height:1.9;margin-bottom:1.75rem}
+.topic-list{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:2.2rem}
+.topic{background:var(--bg3);border:1px solid var(--border);padding:6px 16px;border-radius:100px;font-size:14px;color:var(--muted);transition:all .2s}
+.topic:hover{background:var(--amber-d);border-color:var(--amber);color:var(--amber-l)}
+.clinks{display:flex;flex-direction:column;gap:10px}
+.clink{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:rgba(24,22,16,.82);border:1px solid var(--border);border-radius:9px;text-decoration:none;color:var(--text);transition:all .2s}
+.clink:hover{border-color:var(--amber)}
+.cl-lbl{font-size:12px;color:var(--dim);margin-top:2px}
+.cl-arr{color:var(--dim);font-size:16px}
+.clink:hover .cl-arr{color:var(--amber)}
+
+footer{border-top:1px solid var(--border);padding:2rem;text-align:center;color:var(--dim);font-size:13px;max-width:860px;margin:0 auto}
+footer span{color:var(--amber-d)}
+.fade-in{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:720px){
+  nav{padding:.9rem 1rem}
+  .nav-links{gap:.8rem}
+  .nav-links a{font-size:12px}
+  section{padding:3.7rem 1.15rem}
+  #hero{padding:5.5rem 1.15rem 3.2rem}
+  .hero-desc{font-size:.96rem}
+  .about-grid,.builds-grid,.now-grid,.triad-grid{grid-template-columns:1fr}
+  .story-block{grid-template-columns:1fr;gap:.7rem;margin-bottom:1.35rem}
+  .story-year{position:static;font-size:12px;color:var(--amber-l)}
+  .tag{font-size:12px;padding:4px 11px}
+  .build-card{min-height:auto}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">deerman</div>
+  <div class="nav-links">
+    <a href="#about">关于</a>
+    <a href="#triad">标签</a>
+    <a href="#story">历程</a>
+    <a href="#builds">AI项目</a>
+    <a href="#now">在做</a>
+    <a href="#connect">联系</a>
+  </div>
+</nav>
+
+<section id="hero">
+  <svg class="deer-mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M16 26C16 26 10 22 10 16c0-4 3-6 3-9 0-2-1-4-2-5M16 26c0 0 6-4 6-10 0-4-3-6-3-9 0-2 1-4 2-5M13 7c-2 1-4 1-5-1M19 7c2 1 4 1 5-1M11 2c-1 2-3 2-4 1M21 2c1 2 3 2 4 1M14 22l-2 7M18 22l2 7" stroke="#c8882a" stroke-width="1.5" stroke-linecap="round"/>
+    <circle cx="16" cy="16" r="2.5" fill="none" stroke="#c8882a" stroke-width="1"/>
+  </svg>
+  <div class="eyebrow">李志铭 · Deerman · Nicholas</div>
+  <h1 class="hero-name">站在边界处，<br>把问题拆开。</h1>
+  <div class="hero-en">GTM × AI Workflow × The World in Between</div>
+  <p class="hero-desc">
+    我现在在荣耀 GTM 做市场计划，也在真实业务里做各种 AI 实验。<br>
+    比起“AI 很酷”，我更关心：<strong>它能不能真的进入工作流，帮人少做重复劳动，多做判断。</strong>
+  </p>
+  <div class="hero-tags">
+    <span class="tag a">AI Solution Builder</span>
+    <span class="tag">GTM / Demand Planning</span>
+    <span class="tag">Prompt & Workflow</span>
+    <span class="tag">Explorer</span>
+    <span class="tag">Storyteller</span>
+    <span class="tag">汕头人</span>
+  </div>
+  <div class="cta">
+    <a href="https://quaily.com/deerman" target="_blank" class="btn btn-o">读我的文字 →</a>
+    <a href="#builds" class="btn btn-p">看看我做过什么</a>
+  </div>
+</section>
+
+<section id="about" class="fade-in">
+  <div class="s-label">关于我</div>
+  <div class="s-title">我是谁？</div>
+  <div class="about-grid">
+    <div class="acard">
+      <div class="acard-lbl">网名由来</div>
+      <div class="acard-val">deerman <span>/ 德曼</span></div>
+    </div>
+    <div class="acard">
+      <div class="acard-lbl">来自 / 所在</div>
+      <div class="acard-val">广东汕头 <span>→ 深圳</span></div>
+    </div>
+    <div class="acard">
+      <div class="acard-lbl">本科</div>
+      <div class="acard-val">香港中文大学（深圳）<span> 国际商务</span></div>
+    </div>
+    <div class="acard">
+      <div class="acard-lbl">当前身份</div>
+      <div class="acard-val">荣耀 GTM <span>/ 市场计划</span></div>
+    </div>
+  </div>
+  <p class="body-text">
+    我的网名 deerman 里，“鹿”代表冷静、跳脱，也有一点不太服管的野性。这个名字用久了，慢慢也像一个提醒：不要只在既定道路上走，要偶尔抬头看看旁边有没有新的路。
+  </p>
+  <p class="body-text">
+    我不是传统工程师，也不是传统业务人。更像一个在中间地带摸索的人：一边理解商业系统怎么运转，一边试着用 AI 把信息、流程和人重新组织起来。
+  </p>
+  <div class="identity-box">
+    <div class="identity-title">我现在越来越喜欢的角色</div>
+    <div class="identity-text">
+      一个 <span class="hl">AI solution builder</span>：不一定写最底层的代码，但会把模糊需求拆成场景、数据、流程、工具和交付物；也会在客户、业务同事和技术同事之间来回翻译，直到事情真的能往前走。
+    </div>
+  </div>
+</section>
+
+<section id="triad" class="fade-in">
+  <div class="s-label">三个标签</div>
+  <div class="s-title">不是人设，是我做事的方式</div>
+  <div class="triad-grid">
+    <div class="triad-card">
+      <div class="triad-no">01</div>
+      <div class="triad-title">Explorer</div>
+      <div class="triad-sub">先去真实世界里看一看</div>
+      <div class="triad-text">
+        我一直不太愿意太早把自己固定住。去 Yale、CBS、UBC 交流，做咨询、公益、创业、消费电子和 AI 项目，本质上都在回答同一个问题：我到底对什么有长期兴趣？
+      </div>
+      <div class="triad-note"><span>关键词：</span>全球经历、跨行业试错、对世界保持好奇。</div>
+    </div>
+    <div class="triad-card">
+      <div class="triad-no">02</div>
+      <div class="triad-title">Builder</div>
+      <div class="triad-sub">不只想清楚，还要让事情跑起来</div>
+      <div class="triad-text">
+        我不是纯工程师式 builder。更准确地说，我是偏 PM 型的 solution builder：把模糊需求拆成场景、流程、数据、工具和交付物，再把人拉到一条线上往前推。
+      </div>
+      <div class="triad-note"><span>关键词：</span>需求拆解、项目管理、AI 工作流、预期管理。</div>
+    </div>
+    <div class="triad-card">
+      <div class="triad-no">03</div>
+      <div class="triad-title">Storyteller</div>
+      <div class="triad-sub">把复杂的东西讲给不同的人听</div>
+      <div class="triad-text">
+        我喜欢把复杂东西讲清楚。给 GTM 同事讲 AI，给技术同事讲业务，给客户讲边界，给团队讲路径。讲故事不是包装，是让不同背景的人终于能坐到同一张桌子上。
+      </div>
+      <div class="triad-note"><span>关键词：</span>表达、翻译、培训、组织学习。</div>
+    </div>
+  </div>
+</section>
+
+<section id="story" class="fade-in">
+  <div class="s-label">我的历程</div>
+  <div class="s-title">不是一条直线，是一路探索</div>
+
+  <div class="story-block">
+    <div class="story-year">2021 — 2024</div>
+    <div class="story-card">
+      <div class="story-k">Explore the World</div>
+      <div class="story-title">从商科出发，去不同环境里测试自己</div>
+      <div class="story-text">
+        在港中深学国际商务和供应链，也去过 Yale、哥本哈根商学院和 UBC 交流。那几年我一边在北美、欧洲和 14 个国家里乱逛，一边做 PwC 政府咨询、ABC 腾讯未来教室、科研成果转化创业项目，也参加过清华“今经乐道”和挪威经济学院案例赛。表面看很散，其实是在练一件事：<strong>理解一个行业、一个组织、一个人群到底怎么运转。</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-block">
+    <div class="story-year">2024 — 2025</div>
+    <div class="story-card">
+      <div class="story-k">Choose the Field</div>
+      <div class="story-title">没有直接读研，先去行业里看真实系统</div>
+      <div class="story-text">
+        我最后没有直接读研，而是选择接荣耀的 offer。不是因为想停下来，而是想进入一个成熟消费电子公司，看供应链、GTM、产品计划和全球业务到底怎么跑。之前在荣耀 S&OP 实习时，我做过 IDC 销量看板、需求预测、内存价格趋势分析，也第一次感到：真实商业系统比课堂模型复杂太多。<strong>做好的 AI 解决方案不能只懂工具，得先懂业务。</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-block">
+    <div class="story-year">2025</div>
+    <div class="story-card">
+      <div class="story-k">Find AI in Work</div>
+      <div class="story-title">AI 从“工具很酷”变成“流程能不能跑起来”</div>
+      <div class="story-text">
+        在 Plaud AI，我看 AI 硬件公司怎么做 VOC、用户研究和全球化增长，也看到社媒评论、用户反馈、市场信息很容易变成一堆难以复用的碎片。后来在 ABC 做 AI 知识库，在外部试飞书多维表格、Dify、FastGPT、企微机器人这些轻量方案。慢慢发现，我真正感兴趣的不是单个模型多强，而是 <strong>AI 能不能进入业务流程，帮组织处理信息、沉淀知识、减少重复劳动。</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-block">
+    <div class="story-year">2025.08 — Now</div>
+    <div class="story-card">
+      <div class="story-k">Build inside GTM</div>
+      <div class="story-title">在荣耀 GTM，看到 AI 落地最真实的一面</div>
+      <div class="story-text">
+        在荣耀，我的本职工作是全球平板、穿戴、音频相关的市场计划和需求计划。但我一直不太满足于只做“岗位说明书里的事”，所以在本职之外，主动做了很多 AI 相关探索。真正推起来之后才发现，大公司做 AI 转型很不容易：信息安全限制很多，流程很长，工具权限复杂，不同团队对 AI 的认知也不一致。于是我一边做 Dify demo，让大家快速看到 AI 可以怎么进入业务；一边发起周周 AI 黑客松，先对齐认知、扩大影响力，再慢慢参与 AI 智能操盘这类更系统的项目。后来我越来越意识到：<strong>很多 AI 项目卡住，不只是因为模型不够强，而是组织的信息、流程和人的认知还没有一起准备好。</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="builds" class="fade-in">
+  <div class="s-label">Selected AI Builds</div>
+  <div class="s-title">我做过 / 正在做的一些 AI 实验</div>
+  <div class="builds-grid">
+    <div class="build-card">
+      <div class="build-top">
+        <div class="build-title">GTM 生命周期销量判断工作流</div>
+        <div class="build-tag">Dify</div>
+      </div>
+      <div class="build-text">
+        把 4P、历史机型类比、档位空间判断、多模型预测和历史案例评审串成一个工作流，用来辅助计划员做生命周期销量判断。
+      </div>
+      <div class="build-learn"><span>学到：</span>流程可以搭出来，但如果前置信息、历史案例和回测体系没有准备好，AI 很难长期跑起来。</div>
+    </div>
+
+    <div class="build-card">
+      <div class="build-top">
+        <div class="build-title">周周 AI 黑客松</div>
+        <div class="build-tag">内部赋能</div>
+      </div>
+      <div class="build-text">
+        在荣耀 GTM 内部做了 4 期分享和带练，每期 25-35 人，从大模型原理、Prompt 到 Dify 工作流、Vibe Coding 和 Agent 工具。
+      </div>
+      <div class="build-learn"><span>学到：</span>让团队会用 AI，比自己会用 AI 难很多。讲清楚“边界”和“场景”，比堆工具名更重要。</div>
+    </div>
+
+    <div class="build-card">
+      <div class="build-top">
+        <div class="build-title">AI 智能操盘项目</div>
+        <div class="build-tag">GTM × AI</div>
+      </div>
+      <div class="build-text">
+        参与公司 AI 智能操盘项目早期规划，把“操盘自动化”这种大而空的需求，拆成市场洞察、竞品分析、卖点生成、项目管理、风险预警等场景。
+      </div>
+      <div class="build-learn"><span>学到：</span>真正难的不是说“AI 可以做”，而是判断先做什么、为什么做、数据够不够、谁会用。</div>
+    </div>
+
+    <div class="build-card">
+      <div class="build-top">
+        <div class="build-title">ABC AI 知识库</div>
+        <div class="build-tag">RAG</div>
+      </div>
+      <div class="build-text">
+        为公益咨询组织做 AI 知识库项目，对比 FastGPT、Ragflow、Dify、Coze，搭建面向历史案例检索和 BD 提案参考的 MVP。
+      </div>
+      <div class="build-learn"><span>学到：</span>知识库不只是上传文档，还要考虑组织怎么维护、志愿者怎么用、答案怎么被信任。</div>
+    </div>
+
+    <div class="build-card">
+      <div class="build-top">
+        <div class="build-title">红树林基金会蜜源项目</div>
+        <div class="build-tag">AI咨询</div>
+      </div>
+      <div class="build-text">
+        面对“AI 赋能生物多样性”的宽泛需求，帮助团队做预期管理、能力边界判断和路径收束，把大问题拆成规划和试点两条线。
+      </div>
+      <div class="build-learn"><span>学到：</span>有些场景不是先上 AI，而是先把数据、流程和专家判断关系弄清楚。</div>
+    </div>
+
+    <div class="build-card">
+      <div class="build-top">
+        <div class="build-title">轻量运营自动化</div>
+        <div class="build-tag">飞书 / 企微</div>
+      </div>
+      <div class="build-text">
+        用飞书多维表格做达人内容解析和结构化分析，也验证过企业微信机器人在外部群场景下的能力边界。
+      </div>
+      <div class="build-learn"><span>学到：</span>客户要的是解决问题，不是炫技。有时验证“不能做”，也是很重要的交付。</div>
+    </div>
+
+    <div class="build-card">
+      <div class="build-top">
+        <div class="build-title">Vibe Coding 内容网页</div>
+        <div class="build-tag">HTML / AI Coding</div>
+      </div>
+      <div class="build-text">
+        把自己过去写过的文章、思考和长笔记，用 AI 辅助整理成更漂亮、更易读的 HTML 页面。不是为了炫网页，而是让内容从“堆在文档里”变成可以被重新阅读和分享的作品。
+      </div>
+      <div class="build-learn"><span>学到：</span>AI 编程最适合先做轻量、小而美、能马上被使用的东西。对非技术背景的人来说，这是把想法变成作品的捷径。</div>
+    </div>
+
+    <div class="build-card">
+      <div class="build-top">
+        <div class="build-title">LLM 知识库系统</div>
+        <div class="build-tag">Codex / Obsidian</div>
+      </div>
+      <div class="build-text">
+        参考 Karpathy 对 LLM 学习路径的思路，用 Codex 辅助梳理代码和工具链，再结合 Obsidian 沉淀自己的 LLM 学习笔记、项目记录和方法论。
+      </div>
+      <div class="build-learn"><span>学到：</span>学 AI 不能只收藏资料。真正有用的是把输入、笔记、代码、项目复盘放进一个可持续更新的个人知识系统里。</div>
+    </div>
+  </div>
+</section>
+
+<section id="travel" class="fade-in">
+  <div class="s-label">足迹</div>
+  <div class="s-title">见过的世界</div>
+  <p class="travel-intro">大三那年，周游了 <strong style="color:var(--amber-l)">14 个国家</strong>。旅行改变了我对人生轨迹的想法，也让我看到很多有趣的生活姿态。人不是只能有一种活法，职业也不是只能有一条路。</p>
+  <div class="country-grid">
+    <div class="chip">🇺🇸 美国</div><div class="chip">🇨🇦 加拿大</div>
+    <div class="chip">🇩🇰 丹麦</div><div class="chip">🇳🇴 挪威</div>
+    <div class="chip">🇮🇸 冰岛</div><div class="chip">🇳🇱 荷兰</div>
+    <div class="chip">🇩🇪 德国</div><div class="chip">🇹🇷 土耳其</div>
+    <div class="chip">🇸🇬 新加坡</div><div class="chip">🇪🇸 西班牙</div>
+    <div class="chip">🇫🇷 法国</div><div class="chip">🇵🇹 葡萄牙</div>
+    <div class="chip">🇭🇺 匈牙利</div><div class="chip">🇹🇭 泰国</div>
+  </div>
+</section>
+
+<section id="now" class="fade-in">
+  <div class="s-label">最近在做</div>
+  <div class="s-title">现在的坐标</div>
+  <div class="now-grid">
+    <div class="ncard">
+      <div class="nc-lbl">Work</div>
+      <div class="nc-title">荣耀 GTM / 市场计划</div>
+      <div class="nc-desc">在真实消费电子业务里理解需求、供应、产品生命周期和 GTM 节奏，也观察 AI 能插进哪些环节。</div>
+    </div>
+    <div class="ncard">
+      <div class="nc-lbl">AI</div>
+      <div class="nc-title">工作流与 Agent 实验</div>
+      <div class="nc-desc">用 Dify、Coze、FastGPT、飞书多维表格、OpenClaw 等工具做各种不完美但真实的小实验。</div>
+    </div>
+    <div class="ncard">
+      <div class="nc-lbl">Writing</div>
+      <div class="nc-title">写作 & 思考</div>
+      <div class="nc-desc">把关于 AI、商业、投资、成长和世界的困惑写下来。不是为了显得深刻，是为了别让想法烂在脑子里。</div>
+    </div>
+    <div class="ncard">
+      <div class="nc-lbl">Life</div>
+      <div class="nc-title">继续探索一种自己的活法</div>
+      <div class="nc-desc">旅行、做饭、运动、投资、写作、做项目。希望自己不要只变成一个效率机器，也不要只做一个会焦虑的人。</div>
+    </div>
+  </div>
+</section>
+
+<section id="summary" class="fade-in">
+  <div class="s-label">最后总结一下</div>
+  <div class="s-title">我现在在寻找什么？</div>
+  <div class="summary-box">
+    <div class="summary-k">Explorer × Builder × Storyteller</div>
+    <div class="summary-title">我想做的，是把 AI 放回真实世界里。</div>
+    <div class="summary-text">
+      过去几年，我从商科、咨询、公益、供应链、GTM 一路摸到 AI。现在越来越确定：我真正感兴趣的不是单个工具多酷，而是 <strong>AI 如何进入组织、进入流程、进入人的日常工作</strong>。我希望自己既能继续探索世界，也能把想法做成东西，还能把复杂问题讲清楚。说人话就是：少一点空中楼阁，多一点真的能用。
+    </div>
+  </div>
+</section>
+
+<section id="connect" class="fade-in">
+  <div class="s-label">联系我</div>
+  <div class="s-title">聊聊吧</div>
+  <p class="conn-text">和我聊天，最好的方式不是自我介绍，而是带着一个问题或想法来。我对“你在想什么、在做什么、卡在哪里”非常敏感。欢迎聊这些话题：</p>
+  <div class="topic-list">
+    <span class="topic">AI 落地与工作流</span><span class="topic">GTM 与供应链</span>
+    <span class="topic">创业与项目管理</span><span class="topic">投资与宏观</span>
+    <span class="topic">旅行路线</span><span class="topic">汕头美食地图</span>
+    <span class="topic">消费电子行业</span><span class="topic">社会创新</span>
+    <span class="topic">个人成长系统</span>
+  </div>
+  <div class="clinks">
+    <a href="https://quaily.com/deerman" target="_blank" class="clink">
+      <div>
+        <div style="font-size:15px">深度思考订阅</div>
+        <div class="cl-lbl">quaily.com/deerman</div>
+      </div>
+      <div class="cl-arr">→</div>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <p>李志铭 Nicholas · <span>deerman</span> · 边界是拿来被观察、理解，然后慢慢突破的</p>
+  <p style="margin-top:.5rem;font-size:12px">最后更新 2026.04 · Built with care</p>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible') }), {threshold:.1});
+document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
